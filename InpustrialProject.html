@@ -1,18 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>
     Industirial Project
     </title>
     <style>
+        
         body{
             background-color: lightskyblue;
             text-align: center;
-                        padding: 0;
+            padding: 0;
             margin: 0;
-
+            font-size: 1.2rem;
         }
+        
         main{
          padding: 0;
         }
+        
         section{
             width: 80%;
             margin:0 auto 2rem ;
@@ -20,33 +26,169 @@
             padding:1.5rem 5rem;
             page-break-after: always;
         }
-    </style>
+        h1,h2{
+            font-size: 2rem;
+        }
+        #slideNum{
+            font-size: 1rem;
+            margin: 1rem;
+            font-weight: bold;
+            padding-bottom: 1rem;
+        }
+        @media print {
+            .controllers {
+            visibility: hidden;
+        }
+            
+}    </style>
+    <script>
+        
+document.addEventListener('DOMContentLoaded', function () {
+ 
+//content    
+    const cover =  `
+            <section class="intro">
+                <h1>
+                    Industrial project
+                </h1>
+                <h2>
+                    Digital transformation
+                </h2>
+                <P>
+                    Author: Ahmed Mohamed Gaber
+                </P>
+                <p>
+                    Supervisor: Dr. Omaima Hatem
+                </p>
+                <p>
+                    Submitted in [partial] fulfilment of the requirements for the degree of The Master in
+                    Entrepreneurship and Innovation Management
+                </p>
+            </section>  
+        `
+    const bmc = `
+            <section class="businessModelCanvas">
+               <div class="bmc">
+                <div class=">
+                </div>
+            </section>
+`
+    const introduction = 
+          `
+            <section class="businessModelCanvas">
+               
+            <h1>
+            Enabling Digital transformation 
+            </h1>
+            <p>
+                We provide the needed Technologies, Training, Analysis and consultant for digital transformation.
+            </p>
+            </section>
+    
+            `
+     const partners = `
+            <section>
+                <h1>Key Partnes</h1>
+                <ul>
+                    <li>The governmental agencies</li>
+                    <li>Private sector Hardware suppliers</li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </section>
+
+
+
+    `
+     const powerPoint = `
+    <div>
+    <iframe src="https://docs.google.com/presentation/d/1Wf2GFHdqPO4YNPYQXK6K1aWEwGZjQhd6lu6TZT5xtoI?usp=sharing&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe>
+    </div>
+`
+     const videoEmbed = `
+<div>
+    <iframe src="https://player.vimeo.com/video/444437180" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+`
+    
+    const slides = [
+        cover,
+        videoEmbed,
+        powerPoint,
+        ];
+    
+    //Handeling app content
+    sessionStorage.setItem('slide',0)
+    const app = document.getElementById('app');
+    //On app loads
+    app.innerHTML = slides[0]
+    
+    const slideNum = document.getElementById('slideNum');
+    slideNum.innerHTML = `Slide 1 of ${slides.length}`
+
+        
+    //Backword Functionality
+    const leftBtn = document.getElementById('leftBtn');
+                leftBtn.addEventListener("click", (e) =>{
+                    e.preventDefault();
+                   currentSlide = parseInt(sessionStorage.getItem('slide'));                   
+                    
+                    if(currentSlide !== 0){
+                        const newSlide = currentSlide -1
+                        sessionStorage.setItem('slide',newSlide)
+                        app.innerHTML = slides[newSlide]
+                        slideNum.innerHTML = `slide ${+newSlide + 1} of ${slides.length}`
+
+                    }else{
+                        console.log(e)
+                    }
+                    
+                    
+                });
+    //Forward Functionality
+    const rightBtn = document.getElementById('rightBtn');
+                rightBtn.addEventListener("click", (e) =>{
+                    e.preventDefault();
+                   currentSlide = parseInt(sessionStorage.getItem('slide'));                 
+                    if(currentSlide !== (slides.length - 1)){
+                        const newSlide = +currentSlide + 1
+                        sessionStorage.setItem('slide',newSlide)
+                        app.innerHTML = slides[newSlide]
+                        slideNum.innerHTML = `slide ${+newSlide + 1} of ${slides.length}`
+
+                    }else{
+                        console.log(e)
+                    }
+                    
+                    
+                });
+         
+});
+
+    </script>
 </head>
 <body>
-<main>
-<section class="intro">
-    <h1>
-    Industrial project
-    </h1>
-    <h2>
-    Digital transformation
-    </h2>
-    <P>Author: Ahmed Mohamed Gaber
-    </P>
-    <p>
-    Supervisor: Dr. Omaima 
-    </p>
-    <p>
-    Submitted in [partial] fulfilment of the requirements for the degree of The Master in
-        Entrepreneurship and Innovation Management
-    </p>
-    </section>  
     <section>
-    
+        <input  id="leftBtn"
+                aria-label='move slides backward'
+                title="move slides backward"
+                type="image" 
+                src="./resources/media/arrow_left.svg" 
+                alt="Submit" width="48"
+                height="48"> 
+        <span id="slideNum"></span>
+         <input id="rightBtn"
+                aria-label='move slides forward'
+                title="move slides forward"
+                id="forwardBtn"
+                type="image" 
+                src="./resources/media/arrow_right.svg" 
+                alt="Submit" width="48"
+                height="48"> 
     </section>
-    
-    
-    
+<main>
+    <div id="app">
+    </div>
 </main>
     
     
