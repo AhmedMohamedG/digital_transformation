@@ -10,7 +10,7 @@ This is a simple project done with basic technologies:
 * Bootatrap
 * HTML5
 * CSS3
-*JavaScript
+* JavaScript
 	
 ## Setup
 Use this URL on your browser to run the app:
